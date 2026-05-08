@@ -4,7 +4,8 @@
       "mcp__ccs-websearch__WebSearch",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(gh *)"
     ]
   }
 }
