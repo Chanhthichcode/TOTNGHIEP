@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Tốt Nghiệp - Học viện ICTU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Particle Background Canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- Opening Overlay -->
+    <div id="overlay">
+        <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <div class="envelope-icon">&#9993;</div>
+                <p class="envelope-text">Bạn có một lời mời</p>
+                <button id="openBtn" class="open-btn">Mở thiệp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Section 1: Hero -->
+        <section class="section hero" id="hero">
+            <div class="hero-content animate-on-scroll">
+                <p class="hero-subtitle">Trân trọng kính mời</p>
+                <h1 class="hero-title">LỄ TỐT NGHIỆP</h1>
+                <p class="hero-school">Học viện Công nghệ Bưu chính Viễn thông</p>
+                <div class="hero-divider"></div>
+                <p class="hero-date">23 tháng 05 năm 2026 &bull; 15:00</p>
+            </div>
+            <div class="scroll-indicator">
+                <span>Cuộn xuống</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- Section 2: Countdown -->
+        <section class="section countdown-section" id="countdown">
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">Đếm ngược thời gian</h2>
+                <div class="countdown-grid" id="countdownGrid">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Ngày</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Giờ</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Phút</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Giây</div>
+                    </div>
+                </div>
+                <p class="countdown-message" id="countdownMessage"></p>
+            </div>
+        </section>
+
+        <!-- Section 3: Event Details -->
+        <section class="section details-section" id="details">
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">Chi tiết sự kiện</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <div class="detail-icon">&#127891;</div>
+                        <div class="detail-content">
+                            <h3>Sự kiện</h3>
+                            <p>Lễ truyền cổ & Tra bằng tốt nghiệp</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">&#128197;</div>
+                        <div class="detail-content">
+                            <h3>Ngày</h3>
+                            <p>Thứ Bảy, 23 tháng 05 năm 2026</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">&#128336;</div>
+                        <div class="detail-content">
+                            <h3>Thời gian</h3>
+                            <p>15:00 (3 giờ chiều)</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">&#128205;</div>
+                        <div class="detail-content">
+                            <h3>Địa điểm</h3>
+                            <p>Đại hội đồng Học viện ICTU</p>
+                            <p class="detail-sub">Hà Nội</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.696!2d105.78!3d21.01!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab58e6a1c8f7%3A0x7e63e15f9b2a0e9!2zSMawb2Mgdmnhu4duIENvbmcgbmfhuqVlIELhuqFjaCBjaMOidmggVmnhu4duIHRow7RuZw!5e0!3m2!1svi!2s!4v1700000000000"
+                        width="100%"
+                        height="250"
+                        style="border:0; border-radius:16px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Footer -->
+        <section class="section footer-section" id="footer">
+            <div class="footer-content animate-on-scroll">
+                <div class="footer-message">
+                    <p class="footer-main">Rất vinh dự được đón tiếp sự hiện diện của bạn!</p>
+                    <p class="footer-sub">Hẹn gặp bạn tại lễ tốt nghiệp</p>
+                </div>
+                <button class="firework-btn" id="fireworkBtn">
+                    <span>&#10024;</span> Tạo pháo hoa
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Music Toggle -->
+    <button class="music-toggle" id="musicToggle" title="Bật/Tắt nhạc">
+        <span class="music-icon" id="musicIcon">&#128264;</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
