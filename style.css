@@ -128,7 +128,23 @@ body {
     color: var(--text-secondary);
     letter-spacing: 3px;
     text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.hero-guest {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
     margin-bottom: 16px;
+    display: none;
+}
+
+.hero-guest.show {
+    display: block;
+    animation: fadeInUp 0.8s ease;
 }
 
 .hero-title {

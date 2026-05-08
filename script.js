@@ -8,6 +8,15 @@
     const MUSIC_SRC = 'assets/audio/graduation.mp3';
     const CONFETTI_COLORS = ['#6C63FF', '#00D2FF', '#FFD700', '#FF6B9D', '#FFFFFF'];
 
+    // --- Guest List ---
+    var GUEST_MAP = {
+        'canha': 'CẢ NHÀ',
+        'nam': 'NAM'
+        // Thêm khách mới ở đây, ví dụ:
+        // 'linh': 'CHỊ LINH',
+        // 'gia-dinh-anh-hung': 'GIA ĐÌNH ANH HÙNG',
+    };
+
     // --- DOM Elements ---
     const overlay = document.getElementById('overlay');
     const openBtn = document.getElementById('openBtn');
@@ -322,8 +331,27 @@
     }
 
     // =====================
+    // Guest Name
+    // =====================
+    function initGuestName() {
+        var params = new URLSearchParams(window.location.search);
+        var guestKey = params.get('to');
+        if (!guestKey) return;
+
+        var guestName = GUEST_MAP[guestKey];
+        if (!guestName) return;
+
+        var guestEl = document.getElementById('guestName');
+        guestEl.textContent = guestName;
+        guestEl.classList.add('show');
+
+        document.title = 'Thiệp Mời Tốt Nghiệp - ' + guestName;
+    }
+
+    // =====================
     // Init
     // =====================
+    initGuestName();
     startCountdown();
     initParticles();
 
