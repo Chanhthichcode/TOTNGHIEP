@@ -31,6 +31,8 @@
     const countdownMessage = document.getElementById('countdownMessage');
     const particlesCanvas = document.getElementById('particles');
 
+    var isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+
     // --- Audio ---
     let audio = null;
     let isPlaying = false;
@@ -164,7 +166,7 @@
         switch (type) {
             case 'burst':
                 confetti({
-                    particleCount: 150,
+                    particleCount: isMobile ? 80 : 150,
                     spread: 180,
                     origin: { y: 0.6 },
                     colors: CONFETTI_COLORS
@@ -180,14 +182,14 @@
                         return;
                     }
                     confetti({
-                        particleCount: 5,
+                        particleCount: isMobile ? 3 : 5,
                         angle: 60,
                         spread: 55,
                         origin: { x: 0 },
                         colors: CONFETTI_COLORS
                     });
                     confetti({
-                        particleCount: 5,
+                        particleCount: isMobile ? 3 : 5,
                         angle: 120,
                         spread: 55,
                         origin: { x: 1 },
@@ -202,30 +204,29 @@
 
                 if (pattern === 'center') {
                     confetti({
-                        particleCount: 120,
+                        particleCount: isMobile ? 60 : 120,
                         spread: 360,
                         origin: { y: 0.5 },
                         colors: CONFETTI_COLORS
                     });
                 } else if (pattern === 'sides') {
                     confetti({
-                        particleCount: 80,
+                        particleCount: isMobile ? 40 : 80,
                         angle: 60,
                         spread: 55,
                         origin: { x: 0 },
                         colors: CONFETTI_COLORS
                     });
                     confetti({
-                        particleCount: 80,
+                        particleCount: isMobile ? 40 : 80,
                         angle: 120,
                         spread: 55,
                         origin: { x: 1 },
                         colors: CONFETTI_COLORS
                     });
                 } else {
-                    // Star pattern - shoot upward
                     confetti({
-                        particleCount: 100,
+                        particleCount: isMobile ? 50 : 100,
                         spread: 120,
                         startVelocity: 45,
                         origin: { y: 0.9 },
@@ -274,7 +275,7 @@
         var canvas = particlesCanvas;
         var ctx = canvas.getContext('2d');
         var particles = [];
-        var particleCount = window.innerWidth < 768 ? 40 : 80;
+        var particleCount = window.innerWidth < 480 ? 25 : (window.innerWidth < 768 ? 40 : 80);
 
         function resize() {
             canvas.width = window.innerWidth;
