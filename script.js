@@ -6,7 +6,7 @@
     // --- Config ---
     const TARGET_DATE = new Date('2026-05-23T15:00:00+07:00');
     const MUSIC_SRC = 'assets/audio/graduation.mp3';
-    const CONFETTI_COLORS = ['#6C63FF', '#00D2FF', '#FFD700', '#FF6B9D', '#FFFFFF'];
+    const CONFETTI_COLORS = ['#8B1A2B', '#D4A853', '#FFF8F0', '#C9918A', '#5C1A28'];
 
     // --- Guest List ---
     var GUEST_MAP = {
@@ -107,6 +107,7 @@
     // Countdown Timer
     // =====================
     function startCountdown() {
+        console.log('Countdown started. Target:', TARGET_DATE.toString(), '| Now:', new Date().toString());
         updateCountdown();
         countdownInterval = setInterval(updateCountdown, 1000);
     }
@@ -115,6 +116,7 @@
         var now = new Date().getTime();
         var target = TARGET_DATE.getTime();
         var diff = target - now;
+        console.log('Countdown diff:', diff, '| days:', Math.floor(diff / (1000 * 60 * 60 * 24)));
 
         if (diff <= 0) {
             clearInterval(countdownInterval);
@@ -237,10 +239,6 @@
         }
     }
 
-    fireworkBtn.addEventListener('click', function () {
-        fireConfetti('random');
-    });
-
     // =====================
     // Scroll Animations
     // =====================
@@ -277,6 +275,14 @@
         var particles = [];
         var particleCount = window.innerWidth < 480 ? 25 : (window.innerWidth < 768 ? 40 : 80);
 
+        // Graduation emojis for floating icons
+        var gradEmojis = ['🎓', '📜', '📖', '🏆', '✨', '🎉'];
+        var logoImg = new Image();
+        logoImg.src = 'https://upload.wikimedia.org/wikipedia/commons/1/13/Logo_PTIT_University.png';
+        var logoLoaded = false;
+        logoImg.onload = function () { logoLoaded = true; };
+        var emojiCount = window.innerWidth < 480 ? 18 : (window.innerWidth < 768 ? 28 : 40);
+
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -285,11 +291,12 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Create particles
-        var colors = ['rgba(108, 99, 255, 0.6)', 'rgba(0, 210, 255, 0.5)', 'rgba(255, 255, 255, 0.4)'];
+        // Create dot particles
+        var colors = ['rgba(139, 26, 43, 0.5)', 'rgba(212, 168, 83, 0.5)', 'rgba(255, 248, 240, 0.4)', 'rgba(201, 145, 138, 0.4)'];
 
         for (var i = 0; i < particleCount; i++) {
             particles.push({
+                type: 'dot',
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 size: Math.random() * 2.5 + 0.5,
@@ -297,6 +304,38 @@
                 speedX: (Math.random() - 0.5) * 0.3,
                 opacity: Math.random() * 0.5 + 0.2,
                 color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        // Create emoji particles
+        for (var j = 0; j < emojiCount; j++) {
+            particles.push({
+                type: 'emoji',
+                emoji: gradEmojis[Math.floor(Math.random() * gradEmojis.length)],
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 18 + 28,
+                speedY: -(Math.random() * 0.3 + 0.15),
+                speedX: (Math.random() - 0.5) * 0.2,
+                opacity: Math.random() * 0.35 + 0.35,
+                rotation: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 0.5
+            });
+        }
+
+        // Create floating logo particles
+        var logoCount = window.innerWidth < 480 ? 4 : (window.innerWidth < 768 ? 6 : 10);
+        for (var k = 0; k < logoCount; k++) {
+            particles.push({
+                type: 'logo',
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 20 + 35,
+                speedY: -(Math.random() * 0.25 + 0.1),
+                speedX: (Math.random() - 0.5) * 0.15,
+                opacity: Math.random() * 0.2 + 0.2,
+                rotation: Math.random() * 30 - 15,
+                rotSpeed: (Math.random() - 0.5) * 0.2
             });
         }
 
@@ -310,18 +349,41 @@
                 p.y += p.speedY;
 
                 // Wrap around
-                if (p.y < -10) {
-                    p.y = canvas.height + 10;
+                if (p.y < -30) {
+                    p.y = canvas.height + 30;
                     p.x = Math.random() * canvas.width;
                 }
-                if (p.x < -10) p.x = canvas.width + 10;
-                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -30) p.x = canvas.width + 30;
+                if (p.x > canvas.width + 30) p.x = -30;
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = p.opacity;
-                ctx.fill();
+                if (p.type === 'logo') {
+                    if (logoLoaded) {
+                        p.rotation += p.rotSpeed;
+                        ctx.save();
+                        ctx.globalAlpha = p.opacity;
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rotation * Math.PI / 180);
+                        ctx.drawImage(logoImg, -p.size / 2, -p.size / 2, p.size, p.size);
+                        ctx.restore();
+                    }
+                } else if (p.type === 'emoji') {
+                    p.rotation += p.rotSpeed;
+                    ctx.save();
+                    ctx.globalAlpha = p.opacity;
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.font = p.size + 'px serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(p.emoji, 0, 0);
+                    ctx.restore();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fill();
+                }
             }
 
             ctx.globalAlpha = 1;
@@ -352,8 +414,8 @@
     // =====================
     // Init
     // =====================
-    initGuestName();
-    startCountdown();
-    initParticles();
+    try { initGuestName(); } catch (e) { console.error('initGuestName error:', e); }
+    try { startCountdown(); } catch (e) { console.error('startCountdown error:', e); }
+    try { initParticles(); } catch (e) { console.error('initParticles error:', e); }
 
 })();
