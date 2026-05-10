@@ -12,7 +12,7 @@
     var GUEST_MAP = {
         'canha1': 'ÔNG NGOẠI, CÁC BÁC, CẬU, MỰ VÀ CÁC ANH CHỊ EM',
         'canha2': 'CÁC BÁC, O, CHÚ VÀ CÁC ANH CHỊ EM',
-        'vananh': 'EM IU',
+        'vananh': 'EM IU ❤️',
         'vanquynh': 'BẠN VÂN QUỲNH',
         'thaoquynh': 'BẠN THẢO QUỲNH',
         'mai': 'BẠN MAI',
