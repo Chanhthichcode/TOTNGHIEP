@@ -161,12 +161,6 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 16px;
-    display: none;
-}
-
-.hero-guest.show {
-    display: block;
-    animation: fadeInUp 0.8s ease;
 }
 
 .hero-attend {
