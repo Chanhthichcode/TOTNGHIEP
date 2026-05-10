@@ -285,6 +285,16 @@
         var particles = [];
         var particleCount = window.innerWidth < 480 ? 25 : (window.innerWidth < 768 ? 40 : 80);
 
+        // Graduation emojis
+        var gradEmojis = ['🎓', '📜', '📖', '🏆', '✨', '🎉'];
+        var emojiCount = window.innerWidth < 480 ? 18 : (window.innerWidth < 768 ? 28 : 40);
+
+        // PTIT Logo
+        var logoImg = new Image();
+        logoImg.src = 'https://upload.wikimedia.org/wikipedia/commons/1/13/Logo_PTIT_University.png';
+        var logoLoaded = false;
+        logoImg.onload = function () { logoLoaded = true; };
+
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -293,11 +303,12 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Create particles
-        var colors = ['rgba(108, 99, 255, 0.6)', 'rgba(0, 210, 255, 0.5)', 'rgba(255, 255, 255, 0.4)'];
+        // Dot particles
+        var colors = ['rgba(139, 26, 43, 0.5)', 'rgba(212, 168, 83, 0.5)', 'rgba(255, 248, 240, 0.4)', 'rgba(201, 145, 138, 0.4)'];
 
         for (var i = 0; i < particleCount; i++) {
             particles.push({
+                type: 'dot',
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 size: Math.random() * 2.5 + 0.5,
@@ -305,6 +316,38 @@
                 speedX: (Math.random() - 0.5) * 0.3,
                 opacity: Math.random() * 0.5 + 0.2,
                 color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        // Emoji particles
+        for (var j = 0; j < emojiCount; j++) {
+            particles.push({
+                type: 'emoji',
+                emoji: gradEmojis[Math.floor(Math.random() * gradEmojis.length)],
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 18 + 28,
+                speedY: -(Math.random() * 0.3 + 0.15),
+                speedX: (Math.random() - 0.5) * 0.2,
+                opacity: Math.random() * 0.35 + 0.35,
+                rotation: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 0.5
+            });
+        }
+
+        // Logo particles
+        var logoCount = window.innerWidth < 480 ? 4 : (window.innerWidth < 768 ? 6 : 10);
+        for (var k = 0; k < logoCount; k++) {
+            particles.push({
+                type: 'logo',
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 20 + 35,
+                speedY: -(Math.random() * 0.25 + 0.1),
+                speedX: (Math.random() - 0.5) * 0.15,
+                opacity: Math.random() * 0.2 + 0.2,
+                rotation: Math.random() * 30 - 15,
+                rotSpeed: (Math.random() - 0.5) * 0.2
             });
         }
 
@@ -317,19 +360,41 @@
                 p.x += p.speedX;
                 p.y += p.speedY;
 
-                // Wrap around
-                if (p.y < -10) {
-                    p.y = canvas.height + 10;
+                if (p.y < -30) {
+                    p.y = canvas.height + 30;
                     p.x = Math.random() * canvas.width;
                 }
-                if (p.x < -10) p.x = canvas.width + 10;
-                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.x < -30) p.x = canvas.width + 30;
+                if (p.x > canvas.width + 30) p.x = -30;
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = p.opacity;
-                ctx.fill();
+                if (p.type === 'logo') {
+                    if (logoLoaded) {
+                        p.rotation += p.rotSpeed;
+                        ctx.save();
+                        ctx.globalAlpha = p.opacity;
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rotation * Math.PI / 180);
+                        ctx.drawImage(logoImg, -p.size / 2, -p.size / 2, p.size, p.size);
+                        ctx.restore();
+                    }
+                } else if (p.type === 'emoji') {
+                    p.rotation += p.rotSpeed;
+                    ctx.save();
+                    ctx.globalAlpha = p.opacity;
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.font = p.size + 'px serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(p.emoji, 0, 0);
+                    ctx.restore();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fill();
+                }
             }
 
             ctx.globalAlpha = 1;
