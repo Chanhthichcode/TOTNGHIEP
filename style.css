@@ -17,7 +17,9 @@
 }
 
 /* === Reset === */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -161,7 +163,7 @@ body {
 }
 
 .hero-title {
-    font-family: var(--font-heading);
+    font-family: 'Bricolage Grotesque', sans-serif;
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-pink) 50%, var(--secondary) 100%);
@@ -169,7 +171,7 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 16px;
-    line-height: 1.1;
+    line-height: 2;
 }
 
 .hero-school {
@@ -491,34 +493,79 @@ body {
 
 /* === Keyframes === */
 @keyframes floatEnvelope {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
 }
 
 @keyframes pulseIcon {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 @keyframes bounceDown {
-    0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
-    50% { transform: rotate(45deg) translateY(8px); opacity: 0.5; }
+
+    0%,
+    100% {
+        transform: rotate(45deg) translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: rotate(45deg) translateY(8px);
+        opacity: 0.5;
+    }
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes flipDigit {
-    0% { transform: rotateX(0); }
-    50% { transform: rotateX(-90deg); }
-    100% { transform: rotateX(0); }
+    0% {
+        transform: rotateX(0);
+    }
+
+    50% {
+        transform: rotateX(-90deg);
+    }
+
+    100% {
+        transform: rotateX(0);
+    }
 }
 
 @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
-    50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.4); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+    }
 }
 
 /* === Responsive === */
@@ -651,7 +698,10 @@ body {
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
