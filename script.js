@@ -20,7 +20,8 @@
         'vu': 'BẠN VŨ',
         'hoang': 'BẠN HOÀNG',
         'tam': 'BẠN TÂM',
-        'nha': 'BA, MẸ, PHƯƠNG UYÊN, ĐỨC LÂM'
+        'nha': 'BA, MẸ, PHƯƠNG UYÊN, ĐỨC LÂM',
+        'thanh': 'BẠN THANH'
     };
 
     // --- DOM Elements ---
