@@ -22,7 +22,8 @@
         'tam': 'BẠN TÂM',
         'nha': 'BA, MẸ, PHƯƠNG UYÊN, ĐỨC LÂM',
         'thanh': 'BẠN THANH',
-        'nguyen': 'BẠN NGUYÊN'
+        'nguyen': 'BẠN NGUYÊN',
+        'vietanh': 'VIỆT ANH'
     };
 
     // --- DOM Elements ---
